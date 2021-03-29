@@ -43,21 +43,25 @@ def add_to_db(request_email, counties_selected):
         try:
             db.session.add(county_to_DB)
             db.session.commit()
-        except:
-            print("Problem adding county")
+        except Exception as e:
+            error = str(e.__dict__['orig'])
+            print(error)
 
 
 def query_user_counties(emailStr):
     userEm = Email.query.filter_by(email=emailStr).first()
     return Counties.query.filter_by(email_id=userEm.id).all()
 
+
 def delete_and_commit(query_to_delete):
     db.session.delete(query_to_delete)
     db.session.commit()
 
+
 @app.route('/', methods=['GET','POST'])
 def home():
     return render_template('home.html', counties= counties_list)
+
 
 @app.route('/process-data', methods=['GET', 'POST'])
 def process_data():

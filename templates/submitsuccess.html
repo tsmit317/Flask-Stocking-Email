@@ -3,7 +3,7 @@
 {% block head %}
 {% endblock %}
 {% block body%}
-    <p>{{email}} {{message}}</p>
+    <p>{{email_query.email}} {{message}}</p>
     <br>
     <br>
     <h4>Counties Selected: </h4>
@@ -14,5 +14,5 @@
 
     <br>
     <br>
-    <a class="back" type="button" href="{{ url_for('home') }}">Back to home</a>
+    <a class="back" type="button" href="{{ url_for('home') }}"><button>Back</button></a>
 {% endblock %}
