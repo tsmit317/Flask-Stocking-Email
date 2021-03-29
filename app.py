@@ -45,7 +45,7 @@ def add_to_db(request_email, counties_selected):
             print("Problem adding county")
 
 @app.route('/', methods=['GET','POST'])
-def hello_world():
+def home():
     if request.method == 'POST':
         
         counties_selected = request.form.getlist('counties')
@@ -55,14 +55,19 @@ def hello_world():
         queryEmail = Email.query.filter_by(email=request_email).first() 
         if queryEmail is None:
             add_to_db(request_email, counties_selected)
-            return "You have been added"
+            return render_template('submitsuccess.html', message="You have been added")
         else:
             
             db.session.delete(queryEmail)
             add_to_db(request_email, counties_selected)
-            return "You have been updated";   
+            return render_template('submitsuccess.html', message="You have been updated")   
     else:
-        return render_template('index.html', counties= counties_list)
+        return render_template('home.html', counties= counties_list)
+
+
+@app.route('/submitsuccess/')
+def submitsuccess():
+    return render_template('submitsuccess.html')
 
 if __name__ == "__main__":
     db.create_all()
