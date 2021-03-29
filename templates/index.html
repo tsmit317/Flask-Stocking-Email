@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block head %}
+{% endblock %}
+
+{% block body %}
+  <form method='POST' action="/"> 
+    <fieldset>      
+        <legend>Select counties</legend> 
+
+        {% for county in counties %}     
+            <input type="checkbox" name="counties" value='{{county}}''>{{county}}
+            <br>      
+        {% endfor %}  
+
+        <br>
+        <label for="email">Enter your email:</label>
+        <input type="email" id="email" name="email">
+        <br>      
+        <input type="submit" name ="submit" value="Submit" >
+        
+
+    </fieldset>      
+  </form>
+{% endblock %}
