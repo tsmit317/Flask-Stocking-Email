@@ -3,7 +3,16 @@
 {% block head %}
 {% endblock %}
 {% block body%}
-    <p>{{message}}</p>
+    <p>{{email}} {{message}}</p>
     <br>
-    <a type="button" href="{{ url_for('home') }}">Back to home</a>
+    <br>
+    <h4>Counties Selected: </h4>
+
+    {% for county in counties_confirmed%}
+        <p>{{county.county_name}}</p>
+    {%endfor%}
+
+    <br>
+    <br>
+    <a class="back" type="button" href="{{ url_for('home') }}">Back to home</a>
 {% endblock %}

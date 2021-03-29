@@ -3,6 +3,8 @@ from flask_sqlalchemy import SQLAlchemy
 
 from countylist import nc_counties_list as counties_list
 
+
+
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///selectedcounties.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
@@ -44,23 +46,29 @@ def add_to_db(request_email, counties_selected):
         except:
             print("Problem adding county")
 
+
+def query_user_counties(emailStr):
+    userEm = Email.query.filter_by(email=emailStr).first()
+    return Counties.query.filter_by(email_id=userEm.id).all()
+
+
 @app.route('/', methods=['GET','POST'])
 def home():
     if request.method == 'POST':
-        
         counties_selected = request.form.getlist('counties')
         request_email = request.form['email']   
 
-       
         queryEmail = Email.query.filter_by(email=request_email).first() 
         if queryEmail is None:
             add_to_db(request_email, counties_selected)
-            return render_template('submitsuccess.html', message="You have been added")
+            return render_template('submitsuccess.html', message=" has been successfully added", 
+                                    counties_confirmed = query_user_counties(request_email), email = queryEmail.email)
+        
         else:
-            
             db.session.delete(queryEmail)
             add_to_db(request_email, counties_selected)
-            return render_template('submitsuccess.html', message="You have been updated")   
+            return render_template('submitsuccess.html', message=" has been successfully updated", 
+                                    counties_confirmed = query_user_counties(request_email), email= queryEmail.email)   
     else:
         return render_template('home.html', counties= counties_list)
 
@@ -68,6 +76,7 @@ def home():
 @app.route('/submitsuccess/')
 def submitsuccess():
     return render_template('submitsuccess.html')
+
 
 if __name__ == "__main__":
     db.create_all()
