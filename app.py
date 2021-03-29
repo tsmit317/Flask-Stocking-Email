@@ -51,9 +51,16 @@ def query_user_counties(emailStr):
     userEm = Email.query.filter_by(email=emailStr).first()
     return Counties.query.filter_by(email_id=userEm.id).all()
 
+def delete_and_commit(query_to_delete):
+    db.session.delete(query_to_delete)
+    db.session.commit()
 
 @app.route('/', methods=['GET','POST'])
 def home():
+    return render_template('home.html', counties= counties_list)
+
+@app.route('/process-data', methods=['GET', 'POST'])
+def process_data():
     if request.method == 'POST':
         counties_selected = request.form.getlist('counties')
         request_email = request.form['email']   
@@ -62,20 +69,33 @@ def home():
         if queryEmail is None:
             add_to_db(request_email, counties_selected)
             return render_template('submitsuccess.html', message=" has been successfully added", 
-                                    counties_confirmed = query_user_counties(request_email), email = queryEmail.email)
+                                    counties_confirmed = query_user_counties(request_email), email_query = Email.query.filter_by(email=request_email).first())
         
         else:
-            db.session.delete(queryEmail)
+            delete_and_commit(queryEmail)
             add_to_db(request_email, counties_selected)
             return render_template('submitsuccess.html', message=" has been successfully updated", 
-                                    counties_confirmed = query_user_counties(request_email), email= queryEmail.email)   
-    else:
-        return render_template('home.html', counties= counties_list)
+                                    counties_confirmed = query_user_counties(request_email), email_query= Email.query.filter_by(email=request_email).first())   
+    
 
-
-@app.route('/submitsuccess/')
+@app.route('/submitsuccess')
 def submitsuccess():
     return render_template('submitsuccess.html')
+
+
+@app.route('/unsubscribe', methods=['GET','POST'])
+def unsubscribe():
+    if request.method == 'POST':
+        request_email = request.form['email']
+        queryEmail = Email.query.filter_by(email=request_email).first()
+        if queryEmail is None:
+            return render_template('unsubscribe.html', message = "You are currently unsubscribed.")
+        else:
+            delete_and_commit(queryEmail)
+            return render_template('unsubscribe.html', message = "You have been successfully unsubscribed!")
+    
+    else:
+        return render_template('unsubscribe.html', message= "Enter your email to unsubscribe.")
 
 
 if __name__ == "__main__":
