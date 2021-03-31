@@ -58,6 +58,21 @@ def delete_and_commit(query_to_delete):
     db.session.commit()
 
 
+def find_emails_for_WScounty(county_to_find):
+    return [temp.email for temp in Email.query.join(Counties).filter(Counties.county_name == county_to_find).all()]
+    
+
+def make_dict_for_emails(c_list):
+    email_with_counties_dict = {}
+    for c in c_list: 
+        for i in find_emails_for_WScounty(c):
+            if i in email_with_counties_dict.keys():
+                email_with_counties_dict[i].append(c)
+            else:
+                email_with_counties_dict[i] = [c]
+    return email_with_counties_dict            
+
+
 @app.route('/', methods=['GET','POST'])
 def home():
     return render_template('home.html', counties= counties_list)
