@@ -71,7 +71,6 @@ def find_emails_for_WScounty(county_to_find):
     return [temp.email for temp in Email.query.join(Counties).filter(Counties.county_name == county_to_find).all()]
     
 
-
 def make_email_dict():
     stocking.update_stocking()
     stocking_dict = stocking.get_stocking_dict()
@@ -86,6 +85,7 @@ def make_email_dict():
                 to_send_dict[mail] = {stocked_county: stream_info}
     return to_send_dict
 print(make_email_dict())
+
 
 @app.route('/', methods=['GET','POST'])
 def home():
