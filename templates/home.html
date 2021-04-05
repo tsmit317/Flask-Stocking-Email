@@ -4,15 +4,16 @@
 {% endblock %}
 
 {% block body %}
+
   <form method='POST' action='/process-data'> 
     <fieldset>      
         <legend>Select counties</legend> 
 
         {% for county in counties %}     
-            <input type="checkbox" name="counties" value='{{county}}''>{{county}}
+            <input type="checkbox" name="counties" value='{{county}}'>{{county}}
             <br>      
         {% endfor %}  
-
+        
         <br>
         <label for="email">Enter your email:</label>
         <input type="email" id="email" name="email" required>
