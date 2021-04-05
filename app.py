@@ -4,7 +4,7 @@ from flask import Flask, render_template, url_for, request
 from flask_sqlalchemy import SQLAlchemy
 
 from countylist import nc_counties_list as counties_list
-import troutScrape
+from troutScrape import StockingScrape
 
 
 
@@ -14,6 +14,7 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///selectedcounties.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
+stocking = StockingScrape()
 
 class Email(db.Model):
     id = db.Column(db.Integer, primary_key = True)
@@ -72,7 +73,8 @@ def find_emails_for_WScounty(county_to_find):
 
 
 def make_email_dict():
-    stocking_dict = troutScrape.get_stocking()
+    stocking.update_stocking()
+    stocking_dict = stocking.get_stocking_dict()
     to_send_dict = {}
     for stocked_county, stream_info in stocking_dict.items():
         email_query = find_emails_for_WScounty(stocked_county)
