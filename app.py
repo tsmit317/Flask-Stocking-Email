@@ -4,6 +4,7 @@ from flask import Flask, render_template, url_for, request
 from flask_sqlalchemy import SQLAlchemy
 
 from countylist import nc_counties_list as counties_list
+import troutScrape
 
 
 
@@ -69,16 +70,20 @@ def find_emails_for_WScounty(county_to_find):
     return [temp.email for temp in Email.query.join(Counties).filter(Counties.county_name == county_to_find).all()]
     
 
-def make_dict_for_emails(c_list):
-    email_with_counties_dict = {}
-    for c in c_list: 
-        for i in find_emails_for_WScounty(c):
-            if i in email_with_counties_dict.keys():
-                email_with_counties_dict[i].append(c)
-            else:
-                email_with_counties_dict[i] = [c]
-    return email_with_counties_dict            
 
+def make_email_dict():
+    stocking_dict = troutScrape.get_stocking()
+    to_send_dict = {}
+    for k, v in stocking_dict.items():
+        email_query = find_emails_for_WScounty(k)
+        
+        for mail in email_query:
+            if mail in to_send_dict:
+                to_send_dict[mail][k] = v
+            else:
+                to_send_dict[mail] = {k: v}
+    return to_send_dict
+print(make_email_dict())
 
 @app.route('/', methods=['GET','POST'])
 def home():

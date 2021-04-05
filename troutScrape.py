@@ -14,11 +14,12 @@ def get_stocking():
     for i in troutSoup.findAll('td'):
         nlist.append(i.get_text(strip=True))
 
+    
     for i in range(0, len(nlist), 4):
-        if nlist[i] in ndict:
-            ndict[nlist[i]].append([nlist[i+1], nlist[i+2]])
+        if nlist[i] + " County" in ndict:
+            ndict[nlist[i] + " County"].append([nlist[i+1], nlist[i+2]])
         else:
-            ndict[ nlist[i]] = [[nlist[i+1], nlist[i+2]]]
+            ndict[ nlist[i]  + " County"] = [[nlist[i+1], nlist[i+2]]]
 
     ndict['Date Added'] = troutSoup.find('th', class_='dateHeaderCell').get_text()
 
