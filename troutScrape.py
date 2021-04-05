@@ -8,21 +8,20 @@ def get_stocking():
     troutSoup = BeautifulSoup(troutWP, 'html.parser')
 
     
-
-    ndict = {}
-    nlist = []
+    stocking_dict = {}
+    temp_list = []
     for i in troutSoup.findAll('td'):
-        nlist.append(i.get_text(strip=True))
+        temp_list.append(i.get_text(strip=True))
 
     
     for i in range(0, len(nlist), 4):
-        if nlist[i] + " County" in ndict:
-            ndict[nlist[i] + " County"].append([nlist[i+1], nlist[i+2]])
+        if temp_list[i] + " County" in stocking_dict:
+            stocking_dict[temp_list[i] + " County"].append([temp_list[i+1], temp_list[i+2]])
         else:
-            ndict[ nlist[i]  + " County"] = [[nlist[i+1], nlist[i+2]]]
+            stocking_dict[temp_list[i]  + " County"] = [[temp_list[i+1], temp_list[i+2]]]
 
-    ndict['Date Added'] = troutSoup.find('th', class_='dateHeaderCell').get_text()
+    stocking_dict['Date Added'] = troutSoup.find('th', class_='dateHeaderCell').get_text()
 
-    return ndict
+    return stocking_dict
 
 
