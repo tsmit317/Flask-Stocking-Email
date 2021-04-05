@@ -1,7 +1,10 @@
+from datetime import date
+
 from flask import Flask, render_template, url_for, request
 from flask_sqlalchemy import SQLAlchemy
 
 from countylist import nc_counties_list as counties_list
+
 
 
 
@@ -28,6 +31,10 @@ class Counties(db.Model):
     def __repr__(self):
         return '<Counties {} : {}>'.format(self.county_name, self.email_id)
 
+
+def get_todays_date():
+    todays_date =  date.today()
+    return todays_date.strftime("%A - %B %d, %Y")
 
 def add_to_db(request_email, counties_selected):
     emDB = Email(email= request_email)
