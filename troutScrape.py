@@ -14,7 +14,7 @@ def get_stocking():
         temp_list.append(i.get_text(strip=True))
 
     
-    for i in range(0, len(nlist), 4):
+    for i in range(0, len(temp_list), 4):
         if temp_list[i] + " County" in stocking_dict:
             stocking_dict[temp_list[i] + " County"].append([temp_list[i+1], temp_list[i+2]])
         else:
