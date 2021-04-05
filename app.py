@@ -74,14 +74,14 @@ def find_emails_for_WScounty(county_to_find):
 def make_email_dict():
     stocking_dict = troutScrape.get_stocking()
     to_send_dict = {}
-    for k, v in stocking_dict.items():
-        email_query = find_emails_for_WScounty(k)
+    for stocked_county, stream_info in stocking_dict.items():
+        email_query = find_emails_for_WScounty(stocked_county)
         
         for mail in email_query:
             if mail in to_send_dict:
-                to_send_dict[mail][k] = v
+                to_send_dict[mail][stocked_county] = stream_info
             else:
-                to_send_dict[mail] = {k: v}
+                to_send_dict[mail] = {stocked_county: stream_info}
     return to_send_dict
 print(make_email_dict())
 
