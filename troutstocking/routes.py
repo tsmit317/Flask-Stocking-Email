@@ -1,5 +1,6 @@
 from flask import Flask, render_template, url_for, request
 from datetime import date
+
 from troutstocking import app, db
 from troutstocking.models import Email, Counties
 from troutstocking.countylist import nc_counties_list as counties_list
