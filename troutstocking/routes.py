@@ -1,37 +1,11 @@
-from datetime import date
-
 from flask import Flask, render_template, url_for, request
-from flask_sqlalchemy import SQLAlchemy
-
-from countylist import nc_counties_list as counties_list
-from troutScrape import StockingScrape
-
-
-
-
-app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///selectedcounties.db'
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-db = SQLAlchemy(app)
+from datetime import date
+from troutstocking import app, db
+from troutstocking.models import Email, Counties
+from troutstocking.countylist import nc_counties_list as counties_list
+from troutstocking.troutScrape import StockingScrape
 
 stocking = StockingScrape()
-
-class Email(db.Model):
-    id = db.Column(db.Integer, primary_key = True)
-    email = db.Column(db.String(50), nullable=False)
-    counties = db.relationship('Counties', backref='email', lazy=True, cascade="all, delete, delete-orphan")
-    
-    def __repr__(self):
-        return '<Email {}>'.format(self.email)
-    
-
-class Counties(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    county_name = db.Column(db.String(120), nullable=False)
-    email_id = db.Column(db.Integer, db.ForeignKey('email.id'), nullable=False)
-
-    def __repr__(self):
-        return '<Counties {} : {}>'.format(self.county_name, self.email_id)
 
 
 def get_todays_date():
@@ -47,6 +21,7 @@ def add_to_db(request_email, counties_selected):
         error = str(e.__dict__['orig'])
         print(error)
 
+
     for county in counties_selected:
         county_to_DB = Counties(county_name = county, email_id = emDB.id)
         try:
@@ -55,6 +30,7 @@ def add_to_db(request_email, counties_selected):
         except Exception as e:
             error = str(e.__dict__['orig'])
             print(error)
+
 
 
 def query_user_counties(emailStr):
@@ -84,7 +60,7 @@ def make_email_dict():
             else:
                 to_send_dict[mail] = {stocked_county: stream_info}
     return to_send_dict
-print(make_email_dict())
+
 
 
 @app.route('/', methods=['GET','POST'])
@@ -97,7 +73,7 @@ def process_data():
     if request.method == 'POST':
         counties_selected = request.form.getlist('counties')
         request_email = request.form['email']   
-
+        
         queryEmail = Email.query.filter_by(email=request_email).first() 
         if queryEmail is None:
             add_to_db(request_email, counties_selected)
@@ -130,8 +106,3 @@ def unsubscribe():
     else:
         return render_template('unsubscribe.html', message= "Enter your email to unsubscribe.")
 
-
-if __name__ == "__main__":
-    db.create_all()
-
-    app.run(debug=True)
