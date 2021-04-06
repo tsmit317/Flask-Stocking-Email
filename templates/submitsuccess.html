@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block head %}
-{% endblock %}
+{% endblock head %}
 {% block body%}
     <p>{{email_query.email}} {{message}}</p>
     <br>
@@ -15,4 +15,4 @@
     <br>
     <br>
     <a class="back" type="button" href="{{ url_for('home') }}"><button>Back</button></a>
-{% endblock %}
+{% endblock body %}
