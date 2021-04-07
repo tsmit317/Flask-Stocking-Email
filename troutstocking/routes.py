@@ -1,27 +1,23 @@
 from flask import Flask, render_template, url_for, request
-from datetime import date
 
 from troutstocking import app, db
 from troutstocking.models import Email, Counties
 from troutstocking.countylist import nc_counties_list as counties_list
 from troutstocking.troutScrape import StockingScrape
 
+
 stocking = StockingScrape()
 
-
-def get_todays_date():
-    todays_date =  date.today()
-    return todays_date.strftime("%A - %B %d, %Y")
 
 def add_to_db(request_email, counties_selected):
     emDB = Email(email= request_email)
     try:
         db.session.add(emDB)
         db.session.commit()
+
     except Exception as e:
         error = str(e.__dict__['orig'])
         print(error)
-
 
     for county in counties_selected:
         county_to_DB = Counties(county_name = county, email_id = emDB.id)
@@ -31,7 +27,6 @@ def add_to_db(request_email, counties_selected):
         except Exception as e:
             error = str(e.__dict__['orig'])
             print(error)
-
 
 
 def query_user_counties(emailStr):
@@ -48,9 +43,10 @@ def find_emails_for_WScounty(county_to_find):
     return [temp.email for temp in Email.query.join(Counties).filter(Counties.county_name == county_to_find).all()]
     
 
-def make_email_dict():
+def create_email_dict_for_sending():
     stocking.update_stocking()
     stocking_dict = stocking.get_stocking_dict()
+
     to_send_dict = {}
     for stocked_county, stream_info in stocking_dict.items():
         email_query = find_emails_for_WScounty(stocked_county)
@@ -60,7 +56,9 @@ def make_email_dict():
                 to_send_dict[mail][stocked_county] = stream_info
             else:
                 to_send_dict[mail] = {stocked_county: stream_info}
+
     return to_send_dict
+
 
 
 
