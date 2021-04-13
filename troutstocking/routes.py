@@ -4,6 +4,7 @@ from troutstocking import app, db
 from troutstocking.models import Email, Counties
 from troutstocking.countylist import nc_counties_list as counties_list
 from troutstocking.troutScrape import StockingScrape
+from troutstocking import testEmail
 
 
 stocking = StockingScrape()
@@ -60,7 +61,7 @@ def create_email_dict_for_sending():
     return to_send_dict
 
 
-
+testEmail.send_mailTrap(create_email_dict_for_sending())
 
 @app.route('/', methods=['GET','POST'])
 def home():

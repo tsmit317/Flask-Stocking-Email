@@ -1,14 +1,13 @@
 import smtplib, ssl
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
-import stockingScrape
 from datetime import date
 import os
 
 sender_email = os.environ.get('TROUT_STOCKING_EMAIL')
 sender_email_password = os.environ.get('TROUT_STOCKING_EMAIL_PASSWORD')
 
-
+today =  date.today()
 t = today.strftime("%A - %B %d, %Y")
 
 def create_html(stocking_info_dict):
