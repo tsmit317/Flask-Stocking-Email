@@ -19,6 +19,19 @@
     }
   }
 </script>
+<div class="flash_container">
+  {% with messages = get_flashed_messages(with_categories = true) %}
+    {% if messages %}
+      {% for category, message in messages %}
+      <div class="alert alert-{{category}} alert-dismissible fade show" role="alert">
+        <span>{{ message }}</span>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+      {% endfor %}
+    {% endif %}
+  {% endwith %}
+</div>
+<div class="container">
   <form method='POST' action='/process-data'> 
     <fieldset>      
         <legend>Select counties</legend> 
@@ -38,5 +51,5 @@
      
   </form>
   <a class="unsubscribe" type="button" href="{{ url_for('unsubscribe') }}"><button>Unsubscribe</button></a>    
-  
+</div>  
 {% endblock body %}
