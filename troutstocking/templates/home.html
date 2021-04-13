@@ -4,7 +4,21 @@
 {% endblock head%}
 
 {% block body %}
-
+<script>
+  function selectAllCheckbox(select_all_box) {
+    let checkboxes = document.getElementsByTagName("input");
+    if (select_all_box.checked){
+      for(let i = 0; i < checkboxes.length ; i++) {
+        checkboxes[i].checked = true;
+      }
+    }
+    else{
+      for(let i = 0; i < checkboxes.length ; i++) {
+        checkboxes[i].checked = false;
+      }
+    }
+  }
+</script>
   <form method='POST' action='/process-data'> 
     <fieldset>      
         <legend>Select counties</legend> 
@@ -13,7 +27,7 @@
             <input type="checkbox" name="counties" value='{{county}}'>{{county}}
             <br>      
         {% endfor %}  
-        
+        <input type="checkbox" id="selectall" name="selectall" autocomplete="off"  onclick="selectAllCheckbox(this)">Select All
         <br>
         <label for="email">Enter your email:</label>
         <input type="email" id="email" name="email" required>
