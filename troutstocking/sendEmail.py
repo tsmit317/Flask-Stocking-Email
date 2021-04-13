@@ -8,7 +8,7 @@ import os
 sender_email = os.environ.get('TROUT_STOCKING_EMAIL')
 sender_email_password = os.environ.get('TROUT_STOCKING_EMAIL_PASSWORD')
 
-port = 465
+
 t = today.strftime("%A - %B %d, %Y")
 
 def create_html(stocking_info_dict):
@@ -57,7 +57,7 @@ def create_text(stocking_info_dict):
 
 def send_email(email_info_dict):
   context = ssl.create_default_context()
-  with smtplib.SMTP_SSL("smtp.gmail.com", port, context=context) as server:
+  with smtplib.SMTP_SSL("smtp.gmail.com", 465, context=context) as server:
       server.login(sender_email, sender_email_password)
       
       for receiver, stocking_info_dict in email_info_dict.items():
