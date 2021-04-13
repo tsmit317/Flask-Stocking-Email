@@ -1,4 +1,4 @@
-from flask import Flask, render_template, url_for, request
+from flask import Flask, render_template, url_for, request, flash, redirect
 
 from troutstocking import app, db
 from troutstocking.models import Email, Counties
@@ -61,9 +61,9 @@ def create_email_dict_for_sending():
     return to_send_dict
 
 
-testEmail.send_mailTrap(create_email_dict_for_sending())
+# testEmail.send_mailTrap(create_email_dict_for_sending())
 
-@app.route('/', methods=['GET','POST'])
+@app.route('/home', methods=['GET','POST'])
 def home():
     return render_template('home.html', counties= counties_list)
 
@@ -71,20 +71,24 @@ def home():
 @app.route('/process-data', methods=['GET', 'POST'])
 def process_data():
     if request.method == 'POST':
+        
         counties_selected = request.form.getlist('counties')
         request_email = request.form['email']   
-        
-        queryEmail = Email.query.filter_by(email=request_email).first() 
-        if queryEmail is None:
-            add_to_db(request_email, counties_selected)
-            return render_template('submitsuccess.html', message=" has been successfully added", 
-                                    counties_confirmed = query_user_counties(request_email), email_query = Email.query.filter_by(email=request_email).first())
-        
+        if not counties_selected:
+            flash('You must select at least one county', 'danger')
+            return redirect(url_for('home'))
         else:
-            delete_and_commit(queryEmail)
-            add_to_db(request_email, counties_selected)
-            return render_template('submitsuccess.html', message=" has been successfully updated", 
-                                    counties_confirmed = query_user_counties(request_email), email_query= Email.query.filter_by(email=request_email).first())   
+            queryEmail = Email.query.filter_by(email=request_email).first() 
+            if queryEmail is None:
+                add_to_db(request_email, counties_selected)
+                return render_template('submitsuccess.html', message=" has been successfully added", 
+                                        counties_confirmed = query_user_counties(request_email), email_query = Email.query.filter_by(email=request_email).first())
+            
+            else:
+                delete_and_commit(queryEmail)
+                add_to_db(request_email, counties_selected)
+                return render_template('submitsuccess.html', message=" has been successfully updated", 
+                                        counties_confirmed = query_user_counties(request_email), email_query= Email.query.filter_by(email=request_email).first())   
     
 
 @app.route('/submitsuccess')
