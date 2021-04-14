@@ -110,3 +110,6 @@ def unsubscribe():
     else:
         return render_template('unsubscribe.html', message= "Enter your email to unsubscribe.")
 
+@app.route('/about')
+def about():
+    return render_template('about.html')
