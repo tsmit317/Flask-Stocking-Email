@@ -19,6 +19,7 @@
     }
   }
 </script>
+
 <div class="flash_container">
   {% with messages = get_flashed_messages(with_categories = true) %}
     {% if messages %}
@@ -37,36 +38,43 @@
       <fieldset>
         <legend>Select counties</legend>
         
-        {% for county in counties %}
-
-        <div class="form-check">
-          <input class="form-check-input" name="counties" type="checkbox" value="{{county}}" id="flexCheckDefault">
-          <label class="form-check-label" for="flexCheckDefault">
-            {{county}}
-          </label>
-        </div>  
-        {% endfor %}
-
-        <div class="form-check">
-          <input class="form-check-input" type="checkbox" value="{{county}}" id="flexCheckDefault" onclick="selectAllCheckbox(this)" autocomplete="off" >
-          <label class="form-check-label" for="flexCheckDefault">
-            Select All
-          </label>
+        <div class="col">
+          {% for county in counties %}
+          <div class="row">
+            <div class="form-check">
+              <input class="form-check-input" name="counties" type="checkbox" value="{{county}}" id="flexCheckDefault">
+              <label class="form-check-label" for="flexCheckDefault">
+                {{county}}
+              </label>
+            </div>
+          </div>
+          {% endfor %}
+        
+          <div class="row">
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" value="{{county}}" id="flexCheckDefault"
+                onclick="selectAllCheckbox(this)" autocomplete="off">
+              <label class="form-check-label" for="flexCheckDefault">
+                Select All
+              </label>
+            </div>
+          </div>
+          
+          <div class="row">
+            <div class="input-group mb-3">
+              <span class="input-group-text" id="basic-addon1">Email</span>
+              <input type="text" class="form-control" name="email" placeholder="Enter your E-mail here" aria-label="Email"
+                aria-describedby="basic-addon1" required>
+            </div>
+          </div>
+          
         </div>
-
-        <div class="input-group mb-3">
-          <span class="input-group-text" id="basic-addon1">Email</span>
-          <input type="text" class="form-control" name="email" placeholder="Enter your E-mail here" aria-label="Email" aria-describedby="basic-addon1" required>
-        </div>
-
         <button type="submit" class="btn btn-primary">Submit</button>
         
       </fieldset>
     </div>
-    
-     
   </form>
 </div>
-  <a class="unsubscribe" type="button" href="{{ url_for('unsubscribe') }}"><button>Unsubscribe</button></a>    
+      
 
 {% endblock body %}
