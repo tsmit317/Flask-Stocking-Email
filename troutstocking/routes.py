@@ -102,13 +102,15 @@ def unsubscribe():
         request_email = request.form['email']
         queryEmail = Email.query.filter_by(email=request_email).first()
         if queryEmail is None:
-            return render_template('unsubscribe.html', message = "You are currently unsubscribed.")
+            flash('You are currently unsubscribed.', 'warning')
+            return render_template('unsubscribe.html')
         else:
             delete_and_commit(queryEmail)
-            return render_template('unsubscribe.html', message = "You have been successfully unsubscribed!")
+            flash("You have been successfully unsubscribed!",'success')
+            return render_template('unsubscribe.html')
     
     else:
-        return render_template('unsubscribe.html', message= "Enter your email to unsubscribe.")
+        return render_template('unsubscribe.html')
 
 @app.route('/about')
 def about():
