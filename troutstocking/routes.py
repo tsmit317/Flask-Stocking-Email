@@ -63,7 +63,7 @@ def create_email_dict_for_sending():
 
 # testEmail.send_mailTrap(create_email_dict_for_sending())
 
-@app.route('/home', methods=['GET','POST'])
+@app.route('/', methods=['GET','POST'])
 def home():
     return render_template('home.html', counties= counties_list)
 
