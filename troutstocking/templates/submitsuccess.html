@@ -3,16 +3,22 @@
 {% block head %}
 {% endblock head %}
 {% block body%}
-    <p>{{email_query.email}} {{message}}</p>
-    <br>
-    <br>
-    <h4>Counties Selected: </h4>
+<div class="container">
+    <h1 class="display-3 d-flex justify-content-center">Success!</h1>
+    <p class="mb-3 d-flex justify-content-center">{{email_query.email}} {{message}}</p>
+    
+    <div class="contianer d-flex justify-content-center">
+        
+        <ul class="list-group list-group-flush border border-dark rounded-1 mt-1  w-25">
+            <li class= "list-group-item list-group-item-secondary text-center"><strong>Counties Selected</strong></li>
+            {% for county in counties_confirmed%}
+                <li class="list-group-item">{{county.county_name}}</li>
+            {%endfor%}
+        </ul>
+    </div>
+    
+</div>
 
-    {% for county in counties_confirmed%}
-        <p>{{county.county_name}}</p>
-    {%endfor%}
 
-    <br>
-    <br>
-    <a class="back" type="button" href="{{ url_for('home') }}"><button>Back</button></a>
+
 {% endblock body %}
