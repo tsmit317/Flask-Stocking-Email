@@ -45,8 +45,7 @@ def find_emails_for_WScounty(county_to_find):
     
 
 def create_email_dict_for_sending():
-    stocking.update_stocking()
-    stocking_dict = stocking.get_stocking_dict()
+    stocking_dict = stocking.update_and_get_stocking_dict()
 
     to_send_dict = {}
     for stocked_county, stream_info in stocking_dict.items():
