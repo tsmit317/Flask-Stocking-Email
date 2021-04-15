@@ -1,4 +1,9 @@
+from datetime import datetime
+import sys
+import time
+
 from flask import Flask, render_template, url_for, request, flash, redirect
+from apscheduler.schedulers.background import BackgroundScheduler
 
 from troutstocking import app, db
 from troutstocking.models import Email, Counties
@@ -6,7 +11,7 @@ from troutstocking.countylist import nc_counties_list as counties_list
 from troutstocking.troutScrape import StockingScrape
 from troutstocking import testEmail
 
-
+scheduler = BackgroundScheduler()
 stocking = StockingScrape()
 
 
@@ -46,7 +51,7 @@ def find_emails_for_WScounty(county_to_find):
 
 def create_email_dict_for_sending():
     stocking_dict = stocking.update_and_get_stocking_dict()
-
+    
     to_send_dict = {}
     for stocked_county, stream_info in stocking_dict.items():
         email_query = find_emails_for_WScounty(stocked_county)
@@ -59,8 +64,15 @@ def create_email_dict_for_sending():
 
     return to_send_dict
 
+@scheduler.scheduled_job('interval', id='sched_job', hours=1 ,max_instances=1, misfire_grace_time=900, next_run_time='2021-04-15 10:00:07')
+def sched_job():
+    print("sched_job")
+    testEmail.send_mailTrap(create_email_dict_for_sending())
+    
+    time.sleep(20)
 
-# testEmail.send_mailTrap(create_email_dict_for_sending())
+scheduler.start()     
+
 
 @app.route('/', methods=['GET','POST'])
 def home():
@@ -72,7 +84,7 @@ def process_data():
     if request.method == 'POST':
         
         counties_selected = request.form.getlist('counties')
-        request_email = request.form['email']   
+        request_email = request.form['email'] 
         if not counties_selected:
             flash('You must select at least one county', 'danger')
             return redirect(url_for('home'))
@@ -82,7 +94,7 @@ def process_data():
                 add_to_db(request_email, counties_selected)
                 return render_template('submitsuccess.html', message=" has been successfully added", 
                                         counties_confirmed = query_user_counties(request_email), email_query = Email.query.filter_by(email=request_email).first())
-            
+
             else:
                 delete_and_commit(queryEmail)
                 add_to_db(request_email, counties_selected)
