@@ -10,7 +10,9 @@ class Config(object):
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
 class ProductionConfig(Config):
-    pass
+    DEBUG = False
+    TESTNIG = False
+    SESSION_COOKIE = True
 
 class DevelopmentConfig(Config):
     DEBUG = True
