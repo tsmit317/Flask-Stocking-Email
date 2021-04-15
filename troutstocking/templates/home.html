@@ -18,8 +18,9 @@
       }
     }
   }
-</script>
 
+  
+</script>
 <div class="flash_container">
   {% with messages = get_flashed_messages(with_categories = true) %}
     {% if messages %}
@@ -32,44 +33,43 @@
     {% endif %}
   {% endwith %}
 </div>
-<div class="container-sm">
+<div class="container-sm bg-light text-dark border border-dark rounded-1 mt-1 ">
+  
   <form method='POST' action='/process-data'> 
     <div class="form-group">
       <fieldset>
         <legend>Select counties</legend>
         
-        <div class="col">
+        
           {% for county in counties %}
-          <div class="row">
-            <div class="form-check">
-              <input class="form-check-input" name="counties" type="checkbox" value="{{county}}" id="flexCheckDefault">
-              <label class="form-check-label" for="flexCheckDefault">
-                {{county}}
-              </label>
-            </div>
+          
+          <div class="form-check">
+            <input class="form-check-input" name="counties" type="checkbox" value="{{county}}" id="flexCheckDefault">
+            <label class="form-check-label" for="flexCheckDefault">
+              {{county}}
+            </label>
           </div>
           {% endfor %}
         
-          <div class="row">
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="{{county}}" id="flexCheckDefault"
-                onclick="selectAllCheckbox(this)" autocomplete="off">
-              <label class="form-check-label" for="flexCheckDefault">
-                Select All
-              </label>
-            </div>
+          
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="{{county}}" id="flexCheckDefault"
+              onclick="selectAllCheckbox(this)" autocomplete="off">
+            <label class="form-check-label" for="flexCheckDefault">
+              Select All
+            </label>
           </div>
           
-          <div class="row">
-            <div class="input-group mb-3">
-              <span class="input-group-text" id="basic-addon1">Email</span>
-              <input type="text" class="form-control" name="email" placeholder="Enter your E-mail here" aria-label="Email"
-                aria-describedby="basic-addon1" required>
-            </div>
+          
+          <div class="input-group pt-1 pb-2 w-50">
+            <span class="input-group-text" id="basic-addon1">Email</span>
+            <input type="text" class="form-control" name="email" placeholder="Enter your E-mail here" aria-label="Email"
+              aria-describedby="basic-addon1" required>
           </div>
+          
           
         </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="submit" class="btn btn-primary pt-1 pb-2">Submit</button>
         
       </fieldset>
     </div>
