@@ -54,9 +54,7 @@ def create_email_dict_for_sending():
     
     to_send_dict = {}
     for stocked_county, stream_info in stocking_dict.items():
-        email_query = find_emails_for_WScounty(stocked_county)
-        
-        for mail in email_query:
+        for mail in find_emails_for_WScounty(stocked_county):
             if mail in to_send_dict:
                 to_send_dict[mail][stocked_county] = stream_info
             else:
@@ -64,11 +62,11 @@ def create_email_dict_for_sending():
 
     return to_send_dict
 
+
 @scheduler.scheduled_job('interval', id='sched_job', hours=1 ,max_instances=1, misfire_grace_time=900, next_run_time='2021-04-15 10:00:07')
 def sched_job():
     print("sched_job")
     testEmail.send_mailTrap(create_email_dict_for_sending())
-    
     time.sleep(20)
 
 scheduler.start()     
@@ -92,13 +90,13 @@ def process_data():
             queryEmail = Email.query.filter_by(email=request_email).first() 
             if queryEmail is None:
                 add_to_db(request_email, counties_selected)
-                return render_template('submitsuccess.html', message=" has been successfully added", 
+                return render_template('submitsuccess.html', message=" has been successfully added to the mailing list.", 
                                         counties_confirmed = query_user_counties(request_email), email_query = Email.query.filter_by(email=request_email).first())
 
             else:
                 delete_and_commit(queryEmail)
                 add_to_db(request_email, counties_selected)
-                return render_template('submitsuccess.html', message=" has been successfully updated", 
+                return render_template('submitsuccess.html', message=" has been successfully updated.", 
                                         counties_confirmed = query_user_counties(request_email), email_query= Email.query.filter_by(email=request_email).first())   
     
 
