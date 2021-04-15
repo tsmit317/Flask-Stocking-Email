@@ -15,7 +15,7 @@ class StockingScrape():
         today =  date.today()
         t = today.strftime("%A - %B %d, %Y")
         dayofweek = today.strftime("%A")
-
+      
         div_for_today = troutSoup.find('div', id= dayofweek.lower() + 'Container')
         if  div_for_today is not None:
 
