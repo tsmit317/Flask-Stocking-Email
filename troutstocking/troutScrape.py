@@ -40,6 +40,9 @@ class StockingScrape():
         
         self.stock_dict = self.scrape_stocking_info(troutSoup)
     
+    def update_and_get_stocking_dict(self):
+        self.update_stocking()
+        return self.stock_dict
 
     def get_stocking_dict(self):
         return self.stock_dict
