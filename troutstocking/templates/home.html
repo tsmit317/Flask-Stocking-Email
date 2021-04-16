@@ -33,24 +33,13 @@
     {% endif %}
   {% endwith %}
 </div>
-<div class="container-sm bg-light text-dark border border-dark rounded-1 mt-1 ">
-  
+
+<div class="container-sm home-form text-dark border border-dark rounded-3 mt-2 w-25 mb-3 shadow p-3 mb-5 bg-white rounded">
   <form method='POST' action='/process-data'> 
     <div class="form-group">
       <fieldset>
-        <legend>Select counties</legend>
-        
-        
-          {% for county in counties %}
-          
-          <div class="form-check">
-            <input class="form-check-input" name="counties" type="checkbox" value="{{county}}" id="flexCheckDefault">
-            <label class="form-check-label" for="flexCheckDefault">
-              {{county}}
-            </label>
-          </div>
-          {% endfor %}
-        
+          <legend class = "text-center text-truncate ">Sign Up!</legend>
+          <p class="text-center border-bottom"><small>Simply select the counties you would like notifications for and enter your E-mail to receive stocking alerts.</small></p>
           
           <div class="form-check">
             <input class="form-check-input" type="checkbox" value="{{county}}" id="flexCheckDefault"
@@ -59,22 +48,25 @@
               Select All
             </label>
           </div>
+        
+          {% for county in counties %}
+          <div class="form-check">
+            <input class="form-check-input" name="counties" type="checkbox" value="{{county}}" id="flexCheckDefault">
+            <label class="form-check-label" for="flexCheckDefault">
+              {{county}}
+            </label>
+          </div>
+          {% endfor %}
           
-          
-          <div class="input-group pt-1 pb-2 w-50">
+          <div class="input-group pt-1 pb-2 ">
             <span class="input-group-text" id="basic-addon1">Email</span>
-            <input type="text" class="form-control" name="email" placeholder="Enter your E-mail here" aria-label="Email"
+            <input type="text" class="form-control" name="email" placeholder="Enter a valid E-mail here" aria-label="Email"
               aria-describedby="basic-addon1" required>
           </div>
-          
-          
-        </div>
-        <button type="submit" class="btn btn-primary pt-1 pb-2">Submit</button>
-        
-      </fieldset>
-    </div>
-  </form>
+            
+          <button type="submit" class="btn btn-primary w-100 pb-2 mb-3">Submit</button>
+        </fieldset>
+      </div>
+    </form>
 </div>
-      
-
 {% endblock body %}
