@@ -3,13 +3,12 @@
 {% block head %}
 {% endblock head %}
 {% block body%}
-<div class="container">
+<div class="container submit-container mt-3 border border-dark rounded-3">
     <h1 class="display-3 d-flex justify-content-center">Success!</h1>
     <p class="mb-3 d-flex justify-content-center">{{email_query.email}} {{message}}</p>
     
     <div class="contianer d-flex justify-content-center">
-        
-        <ul class="list-group list-group-flush border border-dark rounded-1 mt-1  w-25">
+        <ul class="list-group list-group-flush border border-dark rounded-1 mt-1  mb-3 list-container">
             <li class= "list-group-item list-group-item-secondary text-center"><strong>Counties Selected</strong></li>
             {% for county in counties_confirmed%}
                 <li class="list-group-item">{{county.county_name}}</li>
