@@ -44,6 +44,11 @@ def delete_and_commit(query_to_delete):
     db.session.delete(query_to_delete)
     db.session.commit()
 
+def delete_everthing(modelToDelete):
+    db.session.query(modelToDelete).delete()
+    db.session.commit()
+
+
 
 def find_emails_for_WScounty(county_to_find):
     return [temp.email for temp in Email.query.join(Counties).filter(Counties.county_name == county_to_find).all()]
@@ -69,7 +74,7 @@ def sched_job():
     testEmail.send_mailTrap(create_email_dict_for_sending())
     time.sleep(20)
 
-scheduler.start()     
+# scheduler.start()     
 
 
 @app.route('/', methods=['GET','POST'])
