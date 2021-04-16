@@ -1,24 +1,34 @@
+
 body {
-	background-color: #d8d8d8  !important;
-}
-.page-holder {
-	min-height: 100vh;
-  }
-  
-.unsubscribe-bg {
 	background-image: url("/static/images/testBackground2.jpg"); 
 	background-color: #d8d8d8; 
-	max-height: 1000px; 
-	/* overflow: hidden; */
+	overflow: auto;
 	background-position: center; 
 	background-repeat: no-repeat; 
-	background-size:  cover; 
-  }
+	background-size:  cover;
+}
 
-.unsub-container{
-  /* background-color: rgba(255, 255, 255, 0.532); */
-  background-color: rgba(45, 45, 45, 0.8);
-  border-radius: 15px;
-  padding: 10px;
-  margin: 10px;
+.unsub-container {
+	background-color: rgba(255, 255, 255, .9);
+	border-radius: 15px;
+}
+
+
+.home-form {
+	background-color: rgba(255, 255, 255, 0.9);
+  	border-radius: 15px;	
+}
+
+.list-container{
+	display:inline-block;
+}
+.submit-container {
+	background-color: rgba(255, 255, 255, 0.9);
+  	border-radius: 15px;
+	width: 35%;
+}
+
+.about-container{
+	background-color: rgba(255, 255, 255, 0.9);
+  	border-radius: 10px;
 }
