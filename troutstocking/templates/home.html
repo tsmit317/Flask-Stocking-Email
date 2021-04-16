@@ -18,8 +18,6 @@
       }
     }
   }
-
-  
 </script>
 <div class="flash_container">
   {% with messages = get_flashed_messages(with_categories = true) %}
@@ -61,7 +59,7 @@
           <div class="input-group pt-1 pb-2 ">
             <span class="input-group-text" id="basic-addon1">Email</span>
             <input type="text" class="form-control" name="email" placeholder="Enter a valid E-mail here" aria-label="Email"
-              aria-describedby="basic-addon1" required>
+              aria-describedby="basic-addon1" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" title="Must use a valid email"required>
           </div>
             
           <button type="submit" class="btn btn-primary w-100 pb-2 mb-3">Submit</button>
