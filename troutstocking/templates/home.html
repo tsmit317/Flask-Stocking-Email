@@ -19,6 +19,7 @@
     }
   }
 </script>
+
 <div class="flash_container">
   {% with messages = get_flashed_messages(with_categories = true) %}
     {% if messages %}
@@ -32,8 +33,8 @@
   {% endwith %}
 </div>
 
-<div class="container-sm home-form text-dark border border-dark rounded-3 mt-2 w-25 mb-3 shadow p-3 mb-5 bg-white rounded">
-  <form method='POST' action='/process-data'> 
+<div class="container-sm home-form text-dark border border-dark rounded-3 mt-5 w-25 mb-3 shadow p-3 mb-5">
+  <form method='POST' action='/process-data' class="needs-validation" novalidate> 
     <div class="form-group">
       <fieldset>
           <legend class = "text-center text-truncate ">Sign Up!</legend>
@@ -59,7 +60,10 @@
           <div class="input-group pt-1 pb-2 ">
             <span class="input-group-text" id="basic-addon1">Email</span>
             <input type="text" class="form-control" name="email" placeholder="Enter a valid E-mail here" aria-label="Email"
-              aria-describedby="basic-addon1" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" title="Must use a valid email"required>
+              aria-describedby="basic-addon1" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required>
+            <div class="invalid-feedback text-center">
+              Please enter a vaild email.
+            </div>
           </div>
             
           <button type="submit" class="btn btn-primary w-100 pb-2 mb-3">Submit</button>
@@ -67,4 +71,20 @@
       </div>
     </form>
 </div>
+<script>
+   var forms = document.querySelectorAll('.needs-validation');
+
+  // Loop over them and prevent submission
+  Array.prototype.slice.call(forms)
+  .forEach(function (form) {
+      form.addEventListener('submit', function (event) {
+      if (!form.checkValidity()) {
+          event.preventDefault();
+          event.stopPropagation();
+      }
+
+      form.classList.add('was-validated');
+      }, false);
+  });
+</script>
 {% endblock body %}
