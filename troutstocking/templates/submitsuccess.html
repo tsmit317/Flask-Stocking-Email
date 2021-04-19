@@ -3,21 +3,24 @@
 {% block head %}
 {% endblock head %}
 {% block body%}
-<div class="container submit-container mt-3 border border-dark rounded-3">
-    <h1 class="display-3 d-flex justify-content-center">Success!</h1>
-    <p class="mb-3 d-flex justify-content-center">{{email_query.email}} {{message}}</p>
-    
-    <div class="contianer d-flex justify-content-center">
-        <ul class="list-group list-group-flush border border-dark rounded-1 mt-1  mb-3 list-container">
-            <li class= "list-group-item list-group-item-secondary text-center"><strong>Counties Selected</strong></li>
-            {% for county in counties_confirmed%}
-                <li class="list-group-item">{{county.county_name}}</li>
-            {%endfor%}
-        </ul>
+
+<div class="submitsuccess-bg">
+    <div class="container pt-5">
+        <div class="card mx-auto card-bg" style="width: 25rem;">
+            <div class="card-header text-center font-weight-bold"><h4>Success!</h4></div>
+            <img src="/static/images/testbackground2.jpg" >
+            <div class="card-body">
+            <p class="card-text text-center">{{email_query.email}} {{message}}</p>
+                <div class="contianer d-flex justify-content-center">
+                    <ul class="list-group list-group-flush border border-dark rounded-1 mt-1  mb-3 list-container">
+                        <li class= "list-group-item list-group-item-secondary text-center"><strong>Counties Selected</strong></li>
+                        {% for county in counties_confirmed%}
+                            <li class="list-group-item">{{county.county_name}}</li>
+                        {%endfor%}
+                    </ul> 
+                </div>
+            </div>
+        </div>
     </div>
-    
 </div>
-
-
-
 {% endblock body %}
