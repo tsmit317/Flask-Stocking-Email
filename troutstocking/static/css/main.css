@@ -1,21 +1,28 @@
 
 body {
-	background-image: url("/static/images/testBackground2.jpg"); 
+	background-image: url("/static/images/troutbackground2.jpg"); 
 	background-color: #d8d8d8; 
-	overflow: auto;
 	background-position: center; 
 	background-repeat: no-repeat; 
 	background-size:  cover;
+	
 }
 
+.submitsuccess-bg{
+	background: rgba(0,0,0,0.5);	
+}
 .unsub-container {
 	background-color: rgba(255, 255, 255, .9);
 	border-radius: 15px;
 }
 
+.card-bg{
+	background-color: rgba(255, 255, 255, .9);
+	border-radius: 15px;
+}
 
 .home-form {
-	background-color: rgba(255, 255, 255, 0.9);
+	background-color: rgba(255, 255, 255, 0.92);
   	border-radius: 15px;	
 }
 
@@ -31,4 +38,8 @@ body {
 .about-container{
 	background-color: rgba(255, 255, 255, 0.9);
   	border-radius: 10px;
+}
+
+.ncwrc-link{
+	text-decoration: none;
 }
