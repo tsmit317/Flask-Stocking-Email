@@ -3,7 +3,7 @@
 {% block head %}
 {% endblock head %}
 {% block body%}
-<div class="unsubscribe-bg">
+<div class="containter bg">
 
     <div class="flash_container">
         {% with messages = get_flashed_messages(with_categories = true) %}
@@ -26,13 +26,17 @@
                     <div class="col-xl-5 col-lg-6 col-md-8 col-sm-10 mx-auto text-center form p-4 unsub-container border border-dark rounded-3">
                         <h1 class="display-4 py-2 text-truncate text-dark ">Unsubscribe</h1>
                         <div class="px-4">
-                            <form method='POST' action="/unsubscribe" class="justify-content-center">
+                            <form method='POST' action="/unsubscribe" class="justify-content-center needs-validation" novalidate>
                                 <div class="form-group">
                                     <div class="input-group pt-1 pb-2">
                                         <span class="input-group-text" id="basic-addon1">Email</span>
-                                        <input type="text" class="form-control" name="email" placeholder="Enter a valid E-mail" aria-label="Email" aria-describedby="basic-addon1" required>
+                                        <input type="text" class="form-control" name="email" placeholder="Enter a valid E-mail" aria-label="Email" aria-describedby="basic-addon1" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"required>
+                                        <div class="invalid-feedback">
+                                            Please enter a valid email.
+                                        </div>
                                     </div>
                                 </div>
+                                
                                 <button type="submit" class="btn btn-primary btn-md mt-2">Submit</button>
                             </form>
                         </div>
@@ -42,4 +46,20 @@
         </div>
     </section>
 </div>
-{% endblock body %}
+<script>
+    var forms = document.querySelectorAll('.needs-validation');
+
+    // Loop over them and prevent submission
+    Array.prototype.slice.call(forms)
+    .forEach(function (form) {
+        form.addEventListener('submit', function (event) {
+        if (!form.checkValidity()) {
+            event.preventDefault();
+            event.stopPropagation();
+        }
+
+        form.classList.add('was-validated');
+        }, false);
+    });
+    </script>
+    {% endblock body %}
