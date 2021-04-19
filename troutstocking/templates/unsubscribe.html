@@ -3,7 +3,6 @@
 {% block head %}
 {% endblock head %}
 {% block body%}
-<div class="containter bg">
 
     <div class="flash_container">
         {% with messages = get_flashed_messages(with_categories = true) %}
@@ -18,7 +17,6 @@
         {% endwith %}
     </div>
   
-    
     <section id="cover" class="min-vh-100">
         <div id="cover-caption">
             <div class="container pt-5">
@@ -45,11 +43,10 @@
             </div>
         </div>
     </section>
-</div>
+
 <script>
     var forms = document.querySelectorAll('.needs-validation');
 
-    // Loop over them and prevent submission
     Array.prototype.slice.call(forms)
     .forEach(function (form) {
         form.addEventListener('submit', function (event) {
