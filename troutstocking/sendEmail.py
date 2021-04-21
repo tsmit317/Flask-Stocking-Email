@@ -12,28 +12,66 @@ t = today.strftime("%A - %B %d, %Y")
 
 def create_html(stocking_info_dict):
   c_html = """\
-  <html>
-    <body>
-      <h3 class='header' style='color:black;font-weight:bold;font-variant:small-caps;'>North Carolina Trout Stocking Notification</h3>
-      <p>The following counties have been stocked: </p>
-      <br>
-      <table class='stable' style='border-width:1px;border-style:solid;border-color:black;padding-top:10px;padding-bottom:10px;padding-right:10px;padding-left:10px;border-radius:12px;'>
-        <tbody>
-          <tr><th colspan='2' style='color:black;font-weight:bold;' >"""+ t + """</th></tr>
-  """
-  for county_key, stream_list in stocking_info_dict.items():
-    c_html += """<tr>
-            <th class='list-key' colspan='2' style='border-top: 1px solid black; font-weight:bold; padding-top:12px;'>"""+ county_key + """</th></tr>"""
   
+  <html>
+    <meta name="color-scheme" content="only">
+    <body style='background-color: #999999; margin: 0px; padding: 0px; padding-bottom: 10px;'>
+        <div class="topnav" style='background-color: #000000; overflow: hidden;  margin: 0px; padding: 10px; text-align: center;' id="myTopnav">
+          <a style='width: 100%;'><img src="https://lh3.googleusercontent.com/bItVytwX0hQTsVO1DAa-2Mxaj6YbENCIpOanM_Uxdt5fKWOHbW5MgbZIbAyzvQFyVk-HZkxVxGol940d75ccqSIOkpWxvtVL4AHGCqihMlvhvlOKlZSjGT7IjD-kdm0z5SnNC1am=w2400"></a>
+        </div>
+          <div class = 'card' style=' width: 400px; margin: 0 auto; text-align: center; background: #FFFFFF;  border-radius: 8px; box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);'>     
+            <div class= 'image-wrap' style='background: url("https://lh3.googleusercontent.com/8_rZ3mYTAK0Z4XlPUoR3pAOraXuyFHh8hdJFNnsA2CBfKdF3mHpW5OjpN_9AAi-tzAaaxllIFY9C11Behj-W5BuHa2mb4Ppzxz_UF3TLB1VYxCeU0go9J36FyPv3bdP2PoOiC7zt=w2400"); 
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat; 
+            width:100%;
+            height: 200px;
+            color:#FFFFFF;
+            border-radius: 8px 8px 0px 0px;
+            line-height: 1pt;
+            '>
+              <p style = 'font-family: "Roboto", sans-serif; 
+              font-weight: 900;
+              padding-top: 100px;
+              font-size: 24px;
+              color: #FFFFFF;
+              font-size: 1.2em;'>
+              Wednesday - September 30, 2021
+              </p>
+            </div>
+           
+            <table style='margin: auto; padding-bottom:10px;'>
+              <tbody>
+  """
+  for index, (county_key, stream_list) in enumerate(stocking_info_dict.items()):
+    if index == 0:
+      c_html += """<tr>
+                <th colspan='2' style='font-family: "Roboto", sans-serif; font-weight:bold; padding-top:12px; padding-bottom: 10px; font-size: 14px;'>"""+ county_key + """</th></tr>"""
+    
+    else:
+      c_html +="""<tr>
+                <th colspan='2' style='font-family: "Roboto", sans-serif; border-top: 1px solid black; font-weight:bold; padding-top:12px; padding-bottom: 10px; font-size: 14px;'>"""+ county_key + """</th></tr>"""
+    
     for stream in stream_list:
-        for i in range(0, len(stream), 2):
-          c_html += """<tr><td class='stream' style='padding-right:5px;'>""" + stream[i] + "</td><td class ='hatcherytype'>" + stream[i+1] + """</td></tr>"""
-                  
+      for i in range(0, len(stream), 2):
+        c_html += """<tr><td class='stream' style=' padding-bottom: 5px; padding-left:5px; text-align: left;'>""" + stream[i] + "</td><td class ='hatcherytype' style=' padding-bottom: 5px; padding-right: 5px; text-align: right;'>" + stream[i+1] + """</td></tr>"""
+                    
+    
   c_html += """
-        </tbody>
-      </table>
-      <br>
-      <a href="https://www.ncpaws.org/PAWS/Fish/Stocking/Schedule/OnlineSchedule.aspx">Daily Trout Stocking Updates</a> 
+          <tr>
+            <th colspan='2' style = 'border-top: 1px solid black;'</th>
+          </tr>
+          </tbody>
+        </table>
+        <div style='position: relative; text-align: center; border-radius: 0px 0px 8px 8px; padding-top: 10px;'>
+          <div style = ''>
+            <a href="https://www.ncpaws.org/PAWS/Fish/Stocking/Schedule/OnlineSchedule.aspx" style='font-family: "Roboto", sans-serif;'> Daily Trout Stocking Updates</a>
+          </div>
+          <div style = 'padding-top: 20px; padding-bottom: 20px;'>
+            <a href="">Unsubscribe</a>
+          </div>
+        </div>
+      </div>
     </body>
   </html>
   """
