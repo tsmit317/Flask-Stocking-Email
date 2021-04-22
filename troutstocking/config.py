@@ -6,7 +6,7 @@ class Config(object):
 
     SECRET_KEY = os.environ.get('SECRET_KEY')
     SESSION_COOKIE = True
-    SQLALCHEMY_DATABASE_URI = 'sqlite:///selectedcounties.db'
+    SQLALCHEMY_DATABASE_URI =  os.environ.get('TROUT_STOCKING_DB_URI')
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
 class ProductionConfig(Config):
