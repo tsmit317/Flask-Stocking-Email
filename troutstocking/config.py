@@ -1,4 +1,5 @@
 import os
+import re
 
 class Config(object):
     DEBUG = False
@@ -6,7 +7,10 @@ class Config(object):
 
     SECRET_KEY = os.environ.get('SECRET_KEY')
     SESSION_COOKIE = True
-    SQLALCHEMY_DATABASE_URI =  os.environ.get('DATABASE_URL')
+    uri = os.environ.get('DATABASE_URL')
+    if uri.startswith("postgres://"):
+        uri = uri.replace("postgres://", "postgresql://", 1)
+    SQLALCHEMY_DATABASE_URI =  uri
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
 class ProductionConfig(Config):
