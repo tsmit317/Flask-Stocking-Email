@@ -3,6 +3,7 @@ from troutstocking import db
 
 class Email(db.Model):
     __tablename__ = 'email'
+    
     id = db.Column(db.Integer, primary_key = True)
     email = db.Column(db.String(50), nullable=False)
     counties = db.relationship('Counties', backref='email', lazy=True, cascade="all, delete, delete-orphan")
