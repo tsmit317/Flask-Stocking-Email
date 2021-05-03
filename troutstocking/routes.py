@@ -71,7 +71,7 @@ def sched_job():
     testEmail.send_mailTrap(create_email_dict_for_sending())
     time.sleep(20)
 
-sched_job().start()
+scheduler.start()
 
 
 @app.route('/', methods=['GET','POST'])
