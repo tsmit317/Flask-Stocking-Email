@@ -38,9 +38,7 @@ def create_html(stocking_info_dict):
               padding-top: 100px;
               font-size: 24px;
               color: #FFFFFF;
-              font-size: 1.2em;'>
-              Wednesday - September 30, 2021
-              </p>
+              font-size: 1.2em;'>"""+ t +"""</p>
             </div>
            
             <table style='margin: auto; padding-bottom:10px;'>
