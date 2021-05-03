@@ -15,9 +15,11 @@ class StockingScrape():
         today =  date.today()
         t = today.strftime("%A - %B %d, %Y")
         dayofweek = today.strftime("%A")
-      
+        
+        
         div_for_today = troutSoup.find('div', id= dayofweek.lower() + 'Container')
-        if  div_for_today is not None:
+        checkheaderCell = div_for_today.find('th', class_='dateHeaderCell').get_text(strip=True)
+        if checkheaderCell == t:
 
             for i in div_for_today.findAll('td'):
                 temp_list.append(i.get_text(strip=True))
