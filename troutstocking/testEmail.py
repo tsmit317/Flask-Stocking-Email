@@ -20,7 +20,7 @@ def create_html(stocking_info_dict):
     <meta name="color-scheme" content="only">
     <body style='background-color: #999999; margin: 0px; padding: 0px; padding-bottom: 10px;'>
         <div class="topnav" style='background-color: #000000; overflow: hidden;  margin: 0px; padding: 10px; text-align: center;' id="myTopnav">
-          <a style='width: 100%;'><img src="https://lh3.googleusercontent.com/bItVytwX0hQTsVO1DAa-2Mxaj6YbENCIpOanM_Uxdt5fKWOHbW5MgbZIbAyzvQFyVk-HZkxVxGol940d75ccqSIOkpWxvtVL4AHGCqihMlvhvlOKlZSjGT7IjD-kdm0z5SnNC1am=w2400"></a>
+          <a style='width: 100%;'><a href="https://ncstockingalert.herokuapp.com/" target="_blank"><img src="https://lh3.googleusercontent.com/bItVytwX0hQTsVO1DAa-2Mxaj6YbENCIpOanM_Uxdt5fKWOHbW5MgbZIbAyzvQFyVk-HZkxVxGol940d75ccqSIOkpWxvtVL4AHGCqihMlvhvlOKlZSjGT7IjD-kdm0z5SnNC1am=w2400"></a></a>
         </div>
           <div class = 'card' style=' width: 400px; margin: 0 auto; text-align: center; background: #FFFFFF;  border-radius: 8px; box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);'>     
             <div class= 'image-wrap' style='background: url("https://lh3.googleusercontent.com/8_rZ3mYTAK0Z4XlPUoR3pAOraXuyFHh8hdJFNnsA2CBfKdF3mHpW5OjpN_9AAi-tzAaaxllIFY9C11Behj-W5BuHa2mb4Ppzxz_UF3TLB1VYxCeU0go9J36FyPv3bdP2PoOiC7zt=w2400"); 
@@ -66,10 +66,10 @@ def create_html(stocking_info_dict):
         </table>
         <div style='position: relative; text-align: center; border-radius: 0px 0px 8px 8px; padding-top: 10px;'>
           <div style = ''>
-            <a href="https://www.ncpaws.org/PAWS/Fish/Stocking/Schedule/OnlineSchedule.aspx" style='font-family: "Roboto", sans-serif;'> Daily Trout Stocking Updates</a>
+            <a href="https://www.ncpaws.org/PAWS/Fish/Stocking/Schedule/OnlineSchedule.aspx" target="_blank" style='font-family: "Roboto", sans-serif;'> Daily Trout Stocking Updates</a>
           </div>
           <div style = 'padding-top: 20px; padding-bottom: 20px;'>
-            <a href="">Unsubscribe</a>
+            <<a href="https://ncstockingalert.herokuapp.com/unsubscribe" target="_blank">Unsubscribe</a>
           </div>
         </div>
       </div>
