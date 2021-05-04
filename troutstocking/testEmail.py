@@ -69,7 +69,7 @@ def create_html(stocking_info_dict):
             <a href="https://www.ncpaws.org/PAWS/Fish/Stocking/Schedule/OnlineSchedule.aspx" target="_blank" style='font-family: "Roboto", sans-serif;'> Daily Trout Stocking Updates</a>
           </div>
           <div style = 'padding-top: 20px; padding-bottom: 20px;'>
-            <<a href="https://ncstockingalert.herokuapp.com/unsubscribe" target="_blank">Unsubscribe</a>
+            <a href="https://ncstockingalert.herokuapp.com/unsubscribe" target="_blank">Unsubscribe</a>
           </div>
         </div>
       </div>
