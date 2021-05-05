@@ -4,27 +4,28 @@
 {% endblock head%}
 
 {% block body %}
-
-<div class="container pb-5">
-    <div class="container about-container w-50 mt-5 mb-3 rounded-3">
-        <div class="about-title pl-3 ">
-            <div class="container ml-1 pt-3">
-                <h1 class="">About</h1>
-                <p class="">Typically the NC Wildlife Resources Commission releases an annual trout stocking schedule on their website, 
-                            informing the public of when and what streams will be stocked. Unfortunately, COVID-19 threw a wrench in the stocking schedule this year.
-                            While NCWRC does post daily stocking updates online, it requires individuals to check the website everyday to see if their local/favorite streams have been stocked.
-                            Thus the idea to create an automated email notification was born.</p>
-            </div>
-            
-            <div class="container ml-1 pt-3 mb-3">
-                <h4 class="pt-2">How it works</h4>
-                <p class="pb-3">Utilizing web scraping through pythons Beautifulsoup library, the application checks
-                                <a class = "ncwrc-link" href="https://www.ncpaws.org/PAWS/Fish/Stocking/Schedule/OnlineSchedule.aspx" target="_blank">NCWRC's Daily Stocking Update webpage</a> 
-                                for any updates for the current day. If there have been any new stockings for the current day, 
-                                the application queries its database to find users who have selected notifications for the counties which have been stocked. 
-                                This information is then sent via E-mail to the user.</p>
+<section id="cover" class="min-vh-100">
+    <div class="container pb-5">
+        <div class="container about-container w-50 mt-5 mb-3 rounded-3">
+            <div class="about-title pl-3 ">
+                <div class="container ml-1 pt-3">
+                    <h1 class="">About</h1>
+                    <p class="">Typically the NC Wildlife Resources Commission releases an annual trout stocking schedule on their website, 
+                                informing the public of when and what streams will be stocked. Unfortunately, COVID-19 threw a wrench in the stocking schedule this year.
+                                While NCWRC does post daily stocking updates online, it requires individuals to check the website everyday to see if their local/favorite streams have been stocked.
+                                Thus the idea to create an automated email notification was born.</p>
+                </div>
+                
+                <div class="container ml-1 pt-3 mb-3">
+                    <h4 class="pt-2">How it works</h4>
+                    <p class="pb-3">Utilizing web scraping through pythons Beautifulsoup library, the application checks
+                                    <a class = "ncwrc-link" href="https://www.ncpaws.org/PAWS/Fish/Stocking/Schedule/OnlineSchedule.aspx" target="_blank">NCWRC's Daily Stocking Update webpage</a> 
+                                    for any updates for the current day. If there have been any new stockings for the current day, 
+                                    the application queries its database to find users who have selected notifications for the counties which have been stocked. 
+                                    This information is then sent via E-mail to the user.</p>
+                </div>
             </div>
         </div>
     </div>
-</div>
+</section>
 {% endblock body %}
