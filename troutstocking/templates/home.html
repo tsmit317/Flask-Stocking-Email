@@ -34,43 +34,46 @@
 </div>
 
 <section id="cover" class="min-vh-100">
-  <div class="container-sm home-form text-dark border border-dark rounded-3 mt-5 w-25 mb-3 shadow p-3 mb-5">
-    <form method='POST' action='/process-data' class="needs-validation" novalidate> 
-      <div class="form-group">
-        <fieldset>
-            <legend class = "text-center text-truncate ">Sign Up!</legend>
-            <p class="text-center border-bottom"><small>Simply select the counties you would like notifications for and enter your E-mail to receive stocking alerts.</small></p>
-            
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="{{county}}" id="flexCheckDefault"
-                onclick="selectAllCheckbox(this)" autocomplete="off">
-              <label class="form-check-label" for="flexCheckDefault">
-                Select All
-              </label>
-            </div>
-          
-            {% for county in counties %}
-            <div class="form-check">
-              <input class="form-check-input" name="counties" type="checkbox" value="{{county}}" id="flexCheckDefault">
-              <label class="form-check-label" for="flexCheckDefault">
-                {{county}}
-              </label>
-            </div>
-            {% endfor %}
-            
-            <div class="input-group pt-1 pb-2 ">
-              <span class="input-group-text" id="basic-addon1">Email</span>
-              <input type="text" class="form-control" name="email" placeholder="Enter a valid E-mail here" aria-label="Email"
-                aria-describedby="basic-addon1" pattern="[A-Za-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required>
-              <div class="invalid-feedback text-center">
-                Please enter a vaild email.
-              </div>
-            </div>
+  <div class="row pt-4 pb-4">  
+    <div class="col-xl-5 col-lg-6 col-md-8 col-sm-10 mx-auto form p-4 home-form border border-dark rounded-4 shadow">
+ 
+      <form method='POST' action='/process-data' class="needs-validation" novalidate> 
+        <div class="form-group">
+          <fieldset>
+              <legend class = "text-center text-truncate ">Sign Up!</legend>
+              <p class="text-center border-bottom"><small>Simply select the counties you would like notifications for and enter your E-mail to receive stocking alerts.</small></p>
               
-            <button type="submit" class="btn btn-primary w-100 pb-2 mb-3">Submit</button>
-          </fieldset>
-        </div>
-      </form>
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="{{county}}" id="flexCheckDefault"
+                  onclick="selectAllCheckbox(this)" autocomplete="off">
+                <label class="form-check-label" for="flexCheckDefault">
+                  Select All
+                </label>
+              </div>
+            
+              {% for county in counties %}
+              <div class="form-check">
+                <input class="form-check-input" name="counties" type="checkbox" value="{{county}}" id="flexCheckDefault">
+                <label class="form-check-label" for="flexCheckDefault">
+                  {{county}}
+                </label>
+              </div>
+              {% endfor %}
+              
+              <div class="input-group pt-1 pb-2 ">
+                <span class="input-group-text" id="basic-addon1">Email</span>
+                <input type="text" class="form-control" name="email" placeholder="Enter a valid E-mail here" aria-label="Email"
+                  aria-describedby="basic-addon1" pattern="[A-Za-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required>
+                <div class="invalid-feedback text-center">
+                  Please enter a vaild email.
+                </div>
+              </div>
+                
+              <button type="submit" class="btn btn-primary w-100 pb-2 mb-3">Submit</button>
+            </fieldset>
+          </div>
+        </form>
+    </div>
   </div>
 </section>
 <script>
