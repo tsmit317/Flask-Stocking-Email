@@ -7,9 +7,9 @@ body {
 	background-size:  cover;
 	
 }
-
 .submitsuccess-bg{
 	background: rgba(0,0,0,0.5);	
+	background-size:  cover;
 }
 .unsub-container {
 	background-color: rgba(255, 255, 255, .9);
@@ -27,7 +27,7 @@ body {
 }
 
 .list-container{
-	display:inline-block;
+	display: inline-block;
 }
 .submit-container {
 	background-color: rgba(255, 255, 255, 0.9);
@@ -62,14 +62,17 @@ input {
  /* X-Small devices (portrait phones, less than 576px) */
 @media (max-width: 575.98px) { 
 	.nav-logo{
-		width: 50%;
-		height: 50%;
+		width: 100%;
+		height: 100%;
+	}
+	.navbar-brand{
+		width: 70%;
 	}
 }
 
 /* Small devices (landscape phones, less than 768px) */
 @media (max-width: 767.98px) { 
-
+	
 }
 
 /* Medium devices (tablets, less than 992px) */
