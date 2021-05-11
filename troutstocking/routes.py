@@ -38,10 +38,6 @@ def query_user_counties(emailStr):
     userEm = Email.query.filter_by(email=emailStr).first()
     return Counties.query.filter_by(email_id=userEm.id).all()
 
-def delete_and_commit(query_to_delete):
-    db.session.delete(query_to_delete)
-    db.session.commit()
-
 def delete_everthing(modelToDelete):
     db.session.query(modelToDelete).delete()
     db.session.commit()
