@@ -98,7 +98,7 @@ def send_email(email_info_dict):
       for receiver, stocking_info_dict in email_info_dict.items():
         
         message = MIMEMultipart("alternative")
-        message["Subject"] = "testing multipart"
+        message["Subject"] = "Stocking Alert"
         message["From"] = sender_email
         message["To"] = receiver
         
