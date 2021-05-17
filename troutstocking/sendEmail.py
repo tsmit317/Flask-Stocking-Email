@@ -90,7 +90,7 @@ def create_text(stocking_info_dict):
   return c_text
 
 
-def send_email(email_info_dict):
+def send_email_to_users(email_info_dict):
   context = ssl.create_default_context()
   with smtplib.SMTP_SSL("smtp.gmail.com", 465, context=context) as server:
       server.login(sender_email, sender_email_password)
