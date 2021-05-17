@@ -69,7 +69,7 @@ def create_email_dict_for_sending():
 
 @scheduler.scheduled_job('interval', id='sched_job', hours=24 ,max_instances=1, misfire_grace_time=900, next_run_time='2021-05-03 16:30:00')
 def sched_job():
-    testEmail.send_mailTrap(create_email_dict_for_sending())
+    sendEmail.send_email_to_users(create_email_dict_for_sending())
     time.sleep(20)
 
 scheduler.start()
