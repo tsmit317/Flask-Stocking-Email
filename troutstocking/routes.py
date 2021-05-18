@@ -74,6 +74,7 @@ def sched_job():
 
 scheduler.start()
 
+sendEmail.send_email_to_users(create_email_dict_for_sending())
 
 @app.route('/', methods=['GET','POST'])
 def home():
