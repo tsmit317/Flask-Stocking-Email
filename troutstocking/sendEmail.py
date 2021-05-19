@@ -3,9 +3,8 @@ from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 from datetime import date
 import os
+import time
 
-sender_email = os.environ.get('TROUT_STOCKING_EMAIL')
-sender_email_password = os.environ.get('TROUT_STOCKING_EMAIL_PASSWORD')
 
 today =  date.today()
 t = today.strftime("%A - %B %d, %Y")
@@ -91,9 +90,12 @@ def create_text(stocking_info_dict):
 
 
 def send_email_to_users(email_info_dict):
+  sender_email = os.environ.get('TROUT_STOCKING_EMAIL')
+  sender_email_password = os.environ.get('TROUT_STOCKING_EMAIL_PASSWORD')
   context = ssl.create_default_context()
   with smtplib.SMTP_SSL("smtp.gmail.com", 465, context=context) as server:
       server.login(sender_email, sender_email_password)
+      time.sleep(20)
       
       for receiver, stocking_info_dict in email_info_dict.items():
         
