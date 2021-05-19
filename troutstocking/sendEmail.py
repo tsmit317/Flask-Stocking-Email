@@ -93,10 +93,12 @@ def send_email_to_users(email_info_dict):
   sender_email = os.environ.get('TROUT_STOCKING_EMAIL')
   sender_email_password = os.environ.get('TROUT_STOCKING_EMAIL_PASSWORD')
   context = ssl.create_default_context()
+  
+  print('in send mail')
   with smtplib.SMTP_SSL("smtp.gmail.com", 465, context=context) as server:
       server.login(sender_email, sender_email_password)
       time.sleep(20)
-      
+      print('after login time')
       for receiver, stocking_info_dict in email_info_dict.items():
         
         message = MIMEMultipart("alternative")
