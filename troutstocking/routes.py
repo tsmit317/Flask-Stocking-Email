@@ -67,7 +67,7 @@ def create_email_dict_for_sending():
     return to_send_dict
 
 
-@scheduler.scheduled_job('interval', id='sched_job', hours=24 ,max_instances=1, misfire_grace_time=900, next_run_time='2021-05-03 19:00:00')
+@scheduler.scheduled_job('interval', id='sched_job', hours=24 ,max_instances=1, misfire_grace_time=900, next_run_time='2021-05-19 19:00:00')
 def sched_job():
     sendEmail.send_email_to_users(create_email_dict_for_sending())
     time.sleep(20)
