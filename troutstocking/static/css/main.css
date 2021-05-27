@@ -6,10 +6,12 @@ body {
 	background-repeat: no-repeat; 
 	background-size:  cover;
 }
+
 .submitsuccess-bg{
 	background: rgba(0,0,0,0.5);	
 	background-size:  cover;
 }
+
 .unsub-container {
 	background-color: rgba(255, 255, 255, .9);
 	border-radius: 15px;
@@ -28,6 +30,7 @@ body {
 .list-container{
 	display: inline-block;
 }
+
 .submit-container {
 	background-color: rgba(255, 255, 255, 0.9);
   	border-radius: 15px;
@@ -42,6 +45,7 @@ body {
 .ncwrc-link{
 	text-decoration: none;
 }
+
 .attributions{
 	font-size: 12px;
 }

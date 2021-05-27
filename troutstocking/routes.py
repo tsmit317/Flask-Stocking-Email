@@ -1,5 +1,3 @@
-from datetime import datetime
-import sys
 import time
 
 from flask import Flask, render_template, url_for, request, flash, redirect
@@ -55,9 +53,7 @@ def create_email_dict_for_sending():
     
     to_send_dict = {}
     for stocked_county, stream_info in stocking_dict.items():
-
         for mail in find_emails_for_WScounty(stocked_county):
-
             if mail in to_send_dict:
                 to_send_dict[mail][stocked_county] = stream_info
 

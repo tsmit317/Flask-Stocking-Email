@@ -13,18 +13,17 @@ class StockingScrape():
         temp_list = []
 
         today =  date.today()
-        t = today.strftime("%A - %B %d, %Y")
+        current_day = today.strftime("%A - %B %d, %Y")
         dayofweek = today.strftime("%A")
         
         
         div_for_today = troutSoup.find('div', id= dayofweek.lower() + 'Container')
         checkheaderCell = div_for_today.find('th', class_='dateHeaderCell').get_text(strip=True)
-        if checkheaderCell == t:
+        if checkheaderCell == current_day:
 
             for i in div_for_today.findAll('td'):
                 temp_list.append(i.get_text(strip=True))
 
-            
             for i in range(0, len(temp_list), 4):
                 if temp_list[i] + " County" in stocking_dict:
                     stocking_dict[temp_list[i] + " County"].append([temp_list[i+1], temp_list[i+2]])
