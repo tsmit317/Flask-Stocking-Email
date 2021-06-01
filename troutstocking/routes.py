@@ -1,4 +1,5 @@
 import time
+from datetime import date
 
 from flask import Flask, render_template, url_for, request, flash, redirect
 from apscheduler.schedulers.background import BackgroundScheduler
@@ -11,6 +12,9 @@ from troutstocking import testEmail, sendEmail
 
 scheduler = BackgroundScheduler()
 stocking = StockingScrape()
+
+today =  date.today()
+current_date_string = today.strftime("%Y-%m-%d") + ' 16:30:00'
 
 
 def add_to_db(request_email, counties_selected):
@@ -63,7 +67,7 @@ def create_email_dict_for_sending():
     return to_send_dict
 
 
-@scheduler.scheduled_job('interval', id='sched_job', hours=24 ,max_instances=1, misfire_grace_time=900, next_run_time='2021-05-21 16:30:00')
+@scheduler.scheduled_job('interval', id='sched_job', hours=24 ,max_instances=1, misfire_grace_time=900, next_run_time=current_date_string)
 def sched_job():
     sendEmail.send_email_to_users(create_email_dict_for_sending())
     time.sleep(20)
