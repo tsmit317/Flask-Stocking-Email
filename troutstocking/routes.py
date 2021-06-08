@@ -37,8 +37,8 @@ def add_to_db(request_email, counties_selected):
             print(error)
 
 def query_user_counties(emailStr):
-    userEm = Email.query.filter_by(email=emailStr).first()
-    return Counties.query.filter_by(email_id=userEm.id).all()
+    userEmail = Email.query.filter_by(email=emailStr).first()
+    return Counties.query.filter_by(email_id=userEmail.id).all()
 
 def delete_everthing(modelToDelete):
     db.session.query(modelToDelete).delete()
@@ -48,8 +48,7 @@ def delete_and_commit(query_to_delete):
     db.session.delete(query_to_delete)
     db.session.commit()
 
-
-def find_emails_for_WScounty(county_to_find):
+def find_emails_for_stocked_county(county_to_find):
     return [temp.email for temp in Email.query.join(Counties).filter(Counties.county_name == county_to_find).all()]
     
 def create_email_dict_for_sending():
@@ -57,7 +56,7 @@ def create_email_dict_for_sending():
     
     to_send_dict = {}
     for stocked_county, stream_info in stocking_dict.items():
-        for mail in find_emails_for_WScounty(stocked_county):
+        for mail in find_emails_for_stocked_county(stocked_county):
             if mail in to_send_dict:
                 to_send_dict[mail][stocked_county] = stream_info
 

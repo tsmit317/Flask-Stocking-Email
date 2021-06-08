@@ -11,7 +11,7 @@ mailtrapL = os.environ.get('MAILTRAP_L')
 mailtrapP = os.environ.get('MAILTRAP_P')
 
 today =  date.today()
-t = today.strftime("%A - %B %d, %Y")
+current_date_string = today.strftime("%A - %B %d, %Y")
 
 def create_html(stocking_info_dict):
   c_html = """\
@@ -38,7 +38,7 @@ def create_html(stocking_info_dict):
               padding-top: 100px;
               font-size: 24px;
               color: #FFFFFF;
-              font-size: 1.2em;'>"""+ t +"""</p>
+              font-size: 1.2em;'>"""+ current_date_string +"""</p>
             </div>
            
             <table style='margin: auto; padding-bottom:10px;'>
