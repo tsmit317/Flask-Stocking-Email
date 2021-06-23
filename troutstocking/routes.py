@@ -36,21 +36,26 @@ def add_to_db(request_email, counties_selected):
             error = str(e.__dict__['orig'])
             print(error)
 
+
 def query_user_counties(emailStr):
     userEmail = Email.query.filter_by(email=emailStr).first()
     return Counties.query.filter_by(email_id=userEmail.id).all()
+
 
 def delete_everthing(modelToDelete):
     db.session.query(modelToDelete).delete()
     db.session.commit()
     
+
 def delete_and_commit(query_to_delete):
     db.session.delete(query_to_delete)
     db.session.commit()
 
+
 def find_emails_for_stocked_county(county_to_find):
     return [temp.email for temp in Email.query.join(Counties).filter(Counties.county_name == county_to_find).all()]
-    
+
+
 def create_email_dict_for_sending():
     stocking_dict = stocking.update_and_get_stocking_dict()
     
@@ -126,6 +131,7 @@ def unsubscribe():
     
     else:
         return render_template('unsubscribe.html')
+
 
 @app.route('/about')
 def about():
