@@ -14,7 +14,7 @@ scheduler = BackgroundScheduler()
 stocking = StockingScrape()
 
 today =  date.today()
-current_date_string = today.strftime("%Y-%m-%d") + ' 16:30:00'
+current_date_string = today.strftime("%Y-%m-%d") + ' 17:40:00'
 
 
 def add_to_db(request_email, counties_selected):
