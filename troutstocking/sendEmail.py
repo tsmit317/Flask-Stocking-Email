@@ -103,7 +103,7 @@ def send_email_to_users(email_info_dict):
         
         message = MIMEMultipart("alternative")
         message["Subject"] = "Stocking Alert"
-        message["From"] = sender_email
+        message["From"] = "Trout SN"
         message["To"] = receiver
         
         text = create_text(stocking_info_dict)
