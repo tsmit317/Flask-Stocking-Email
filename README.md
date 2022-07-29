@@ -1,4 +1,4 @@
-# [NC Trout Stocking Alert](https://pages.github.com/)
+# [NC Trout Stocking Alert](https://ncstockingalert.herokuapp.com/)
 
 A simple web app designed to alert users when their favorite streams are stocked with trout.
 
